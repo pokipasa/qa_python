@@ -83,3 +83,14 @@ class TestBooksCollector:
         collector.delete_book_from_favorites("Вторая жизнь Уве")
         favorites = collector.get_list_of_favorites_books()
         assert "Вторая жизнь Уве" not in favorites
+
+    def test_get_list_of_favorites_books_valid_input(self):
+        collector = BooksCollector()
+        collector.add_new_book("Вторая жизнь Уве")
+        collector.add_new_book("Тревожные люди")
+        collector.add_book_in_favorites("Вторая жизнь Уве")
+        collector.add_book_in_favorites("Тревожные люди")
+        favorites = collector.get_list_of_favorites_books()
+        assert len(favorites) == 2
+        assert "Вторая жизнь Уве" in favorites
+        assert "Тревожные люди" in favorites
