@@ -11,20 +11,10 @@ class TestBooksCollector:
         collector.add_new_book('Что делать, если ваш кот хочет вас убить')
         assert len(collector.get_books_rating()) == 2
 
-    @pytest.mark.parametrize(
-        "book_title",
-        [
-            ("Вторая жизнь Уве"),
-            ("Это очень очень очень очень длинное имя книги")
-        ]
-    )
-    def test_add_new_book_invalid_name_too_long(self, book_title):
+    def test_add_new_book_invalid_name_too_long(self):
         collector = BooksCollector()
-        collector.add_new_book(book_title)
-        if len(book_title) > 41:
-            assert book_title not in collector.get_books_genre()
-        else:
-            assert book_title in collector.get_books_genre()
+        collector.add_new_book("Это очень очень очень очень длинное имя книги")
+        assert "Это очень очень очень очень длинное имя книги" not in collector.get_books_genre()
 
     def test_add_new_book_invalid_name_empty_string(self):
         collector = BooksCollector()
